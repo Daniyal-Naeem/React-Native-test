@@ -2,15 +2,16 @@ import React from 'react';
 import {
   View,
   Text,
-  TouchableOpacity,
   Platform,
   StyleSheet,
-  ImageBackground,
+  KeyboardAvoidingView,
+  ScrollView
 } from 'react-native';
-import {Button, TextInput, Card} from 'react-native-paper';
+import {Button, TextInput, Surface} from 'react-native-paper';
 
 const SignUpScreen = ({navigation}) => {
   const [data, setData] = React.useState({
+    name:'',
     email: '',
     password: '',
     check_textInputChange: false,
@@ -21,12 +22,14 @@ const SignUpScreen = ({navigation}) => {
     if (val.length !== 0) {
       setData({
         ...data,
+        name: val,
         email: val,
         check_textInputChange: true,
       });
     } else {
       setData({
         ...data,
+        name: val,
         email: val,
         check_textInputChange: false,
       });
@@ -40,112 +43,118 @@ const SignUpScreen = ({navigation}) => {
     });
   };
 
-
   return (
-    <ImageBackground
-    blurRadius={5}
-    style={styles.background}
-    source={require("../assets/logo.png")}
-  >
-    {/* <View style={styles.container}>
+    <KeyboardAvoidingView style={{flex:1}}>
+    <ScrollView contentContainerStyle={{flex:1}} bounces={false}>
+      <View style={styles.container}>
+        <View
+          style={{
+            backgroundColor: '#FFA500',
+            height: '70%',
+            borderBottomLeftRadius: 30,
+            borderBottomRightRadius: 30,
+            paddingHorizontal: 20,
+          }}>
           <View style={styles.header}>
-            <Text style={styles.text_header}>Welcome!</Text>
-            <Text>To the login page</Text>
-    </View> */}
-        <Card style={styles.card}>
-          <Card.Content>
+            <Text style={styles.text_header}>Sign Up</Text>
+          </View>
+        </View>
+        <Surface style={styles.surface}>
           <View style={styles.action}>
-          <TextInput
-            mode="outlined"
-            label="Name"
-            placeholder="Your Name"
-            style={styles.textInput}
-            autoCapitalize="none"
-            onChangeText={val => textInputChange(val)}
+            <TextInput
+              mode="outlined"
+              label="Name"
+              placeholder="Your Name"
+              style={styles.textInput}
+              autoCapitalize="none"
+              onChangeText={val => textInputChange(val)}
             />
-        </View>
+          </View>
           <View style={styles.action}>
-          <TextInput
-            mode="outlined"
-            label="Email"
-            placeholder="Your Email"
-            style={styles.textInput}
-            autoCapitalize="none"
-            onChangeText={val => textInputChange(val)}
+            <TextInput
+              mode="outlined"
+              label="Email"
+              placeholder="Your Email"
+              style={styles.textInput}
+              autoCapitalize="none"
+              onChangeText={val => textInputChange(val)}
             />
-        </View>
-        
-        <View style={styles.action}>
-          <TextInput
-           mode="outlined"
-           label="Password"
-            placeholder="Your Password"
-            secureTextEntry={data.secureTextEntry ? true : false}
-            style={styles.textInput}
-            autoCapitalize="none"
-            onChangeText={val => handlePasswordChange(val)}
+          </View>
+
+          <View style={styles.action}>
+            <TextInput
+              mode="outlined"
+              label="Password"
+              placeholder="Your Password"
+              secureTextEntry={data.secureTextEntry ? true : false}
+              style={styles.textInput}
+              autoCapitalize="none"
+              onChangeText={val => handlePasswordChange(val)}
             />
-        </View>
-        <TouchableOpacity>
-          <Text style={{color: '#663399', marginTop: 15}}>
-            Forgot password?
-          </Text>
-        </TouchableOpacity>
-        <View style={styles.button}>
-          <Button
-            mode="contained"
-            color="#FFD700"
-            onPress={() => navigation.navigate('Sign Up')}>
-            Sign Up
-          </Button>
-          <Button 
-          mode="Text" 
-          onPress={() => navigation.navigate('Sign Up')}>
-            CREATE ACCOUNT
-          </Button>
-        </View>
-          </Card.Content>
-        </Card>
-    
-    </ImageBackground>
+          </View>
+          <View style={styles.button}>
+            <Button
+              mode="contained"
+              color="#FFA500"
+              style={{width: 250, height: 50, borderRadius: 10}}
+              onPress={() => navigation.navigate('Sign Up')}>
+              Sign Up
+            </Button>
+            <Text>OR CONTINUE WITH</Text>
+            <View style={styles.action}>
+              <Button
+                mode="outlined"
+                style={{borderWidth: 2, borderRadius: 10}}
+                onPress={() => navigation.navigate('Profile')}>
+                GOOGLE
+              </Button>
+              <Button
+                mode="outlined"
+                style={{borderWidth: 2, borderRadius: 10}}
+                onPress={() => navigation.navigate('Competition')}>
+                FACEBOOK
+              </Button>
+            </View>
+          </View>
+        </Surface>
+      </View>
+      </ScrollView>
+    </KeyboardAvoidingView>
   );
 };
 
 export default SignUpScreen;
 
 const styles = StyleSheet.create({
-    background: {
-        flex: 1,
-        alignItems: "center",
-        borderBottomLeftRadius:30,
-        borderBottomRightRadius:30,
-      },
-  header: {
+  container: {
     flex: 1,
-    justifyContent: 'flex-end',
-    paddingHorizontal: 20,
-    paddingBottom: 50,
+    backgroundColor: '#DCDCDC',
   },
-  card: {
-    flex: 1,
-    backgroundColor: '#fff',
-    borderTopLeftRadius: 30,
-    borderTopRightRadius: 30,
-    borderBottomLeftRadius:30,
-    borderBottomRightRadius:30,
-    paddingTop:20,
-    paddingBottom:20,
-    marginLeft:8,
-    marginBottom:50,
-    marginTop:20,
-    width:'90%',
-    height:'50%'
+  surface: {
+    borderRadius: 30,
+    paddingTop: 10,
+    height: '65%',
+    width: '80%',
+    alignItems: 'center',
+    justifyContent: 'center',
+    elevation: 4,
+    marginLeft: 40,
+    marginTop: -300,
+  },
 
+  header: {
+    flex: 3,
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+    paddingHorizontal: 20,
+    paddingBottom: 20,
+    marginTop: 20,
   },
   text_header: {
+    alignItems: 'center',
     color: 'black',
+    fontSize: 15,
     fontWeight: 'bold',
-    fontSize: 30,
   },
   text_footer: {
     color: '#05375a',
@@ -160,13 +169,14 @@ const styles = StyleSheet.create({
   },
   textInput: {
     flex: 1,
-    marginTop: Platform.OS === 'ios' ? 0 : -12,
-    paddingLeft: 10,
+    marginTop: Platform.OS === 'android' ? 0 : -12,
+    paddingLeft: 15,
+    paddingRight: 15,
     color: '#05375a',
   },
   button: {
     alignItems: 'center',
-    marginTop: 50,
+    marginTop: 20,
   },
   signIn: {
     width: '100%',

@@ -1,13 +1,8 @@
 import React from 'react';
-import {
-  View,
-  Text,
-  TouchableOpacity,
-  Platform,
-  StyleSheet,
-  ImageBackground,
-} from 'react-native';
-import {Button, TextInput, Card} from 'react-native-paper';
+import {View, Text, TouchableOpacity, 
+  Platform, StyleSheet,   KeyboardAvoidingView,
+  ScrollView} from 'react-native';
+import {Button, TextInput, Surface} from 'react-native-paper';
 
 const SignInScreen = ({navigation}) => {
   const [data, setData] = React.useState({
@@ -40,21 +35,24 @@ const SignInScreen = ({navigation}) => {
     });
   };
 
-
   return (
-    <ImageBackground
-    blurRadius={5}
-    style={styles.background}
-    source={require("../assets/logo.png")}
-  >
-   
-          <View style={styles.header}>
-            <Text style={styles.text_header}>Welcome!</Text>
-            <Text>To the login page</Text>
-    </View>
-        <Card style={styles.card}>
-          <Card.Content>
-          <View style={styles.action}>
+    <KeyboardAvoidingView style={{flex:1}}>
+    <ScrollView contentContainerStyle={{flex:1}} bounces={false}>
+    <View style={styles.container}>
+      <View
+        style={{
+          backgroundColor: '#FFA500',
+          height: '70%',
+          borderBottomLeftRadius: 30,
+          borderBottomRightRadius: 30,
+          paddingHorizontal: 20,
+        }}>
+        <View style={styles.header}>
+          <Text style={styles.text_header}>Login</Text>
+        </View>
+      </View>
+      <Surface style={styles.surface}>
+        <View style={styles.action}>
           <TextInput
             mode="outlined"
             label="Email"
@@ -62,19 +60,19 @@ const SignInScreen = ({navigation}) => {
             style={styles.textInput}
             autoCapitalize="none"
             onChangeText={val => textInputChange(val)}
-            />
+          />
         </View>
-        
+
         <View style={styles.action}>
           <TextInput
-           mode="outlined"
-           label="Password"
+            mode="outlined"
+            label="Password"
             placeholder="Your Password"
             secureTextEntry={data.secureTextEntry ? true : false}
             style={styles.textInput}
             autoCapitalize="none"
             onChangeText={val => handlePasswordChange(val)}
-            />
+          />
         </View>
         <TouchableOpacity>
           <Text style={{color: '#663399', marginTop: 15}}>
@@ -84,55 +82,54 @@ const SignInScreen = ({navigation}) => {
         <View style={styles.button}>
           <Button
             mode="contained"
-            color="#FFD700"
+            color="#FFA500"
+            style={{width: 250, height: 50, borderRadius: 10}}
             onPress={() => navigation.navigate('Sign Up')}>
             Login
           </Button>
-          <Button 
-          mode="Text" 
-          onPress={() => navigation.navigate('Sign Up')}>
+          <Button mode="Text" onPress={() => navigation.navigate('Sign Up')}>
             CREATE ACCOUNT
           </Button>
         </View>
-          </Card.Content>
-        </Card>
-    
-    </ImageBackground>
+      </Surface>
+    </View>
+    </ScrollView>
+  </KeyboardAvoidingView>
   );
 };
 
 export default SignInScreen;
 
 const styles = StyleSheet.create({
-    background: {
-        flex: 2,
-        alignItems: "center",
-        borderBottomLeftRadius:30,
-        borderBottomRightRadius:30,
-      },
+  container: {
+    flex: 1,
+    backgroundColor: '#DCDCDC',
+  },
+  surface: {
+    borderRadius: 30,
+    paddingTop: 10,
+    height: '60%',
+    width: '80%',
+    alignItems: 'center',
+    justifyContent: 'center',
+    elevation: 4,
+    marginLeft: 40,
+    marginTop: -250,
+  },
+
   header: {
     flex: 3,
     justifyContent: 'flex-start',
+    alignItems: 'center',
     paddingHorizontal: 20,
-    paddingBottom: 50,
-  },
-  card: {
-    flex: 3,
-    justifyContent:'center',
-    backgroundColor: '#fff',
-    borderTopLeftRadius: 30,
-    borderTopRightRadius: 30,
-    borderBottomLeftRadius:30,
-    borderBottomRightRadius:30,
-    paddingTop:20,
-    paddingBottom:20,
-    width:'90%',
-  
+    paddingBottom: 20,
+    marginTop: 20,
   },
   text_header: {
+    alignItems: 'center',
     color: 'black',
     fontWeight: 'bold',
-    fontSize: 30,
+    fontSize: 15,
   },
   text_footer: {
     color: '#05375a',
@@ -147,13 +144,14 @@ const styles = StyleSheet.create({
   },
   textInput: {
     flex: 1,
-    marginTop: Platform.OS === 'ios' ? 0 : -12,
-    paddingLeft: 10,
+    marginTop: Platform.OS === 'android' ? 0 : -12,
+    paddingLeft: 15,
+    paddingRight: 15,
     color: '#05375a',
   },
   button: {
     alignItems: 'center',
-    marginTop: 50,
+    marginTop: 20,
   },
   signIn: {
     width: '100%',
