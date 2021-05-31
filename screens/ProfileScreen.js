@@ -19,15 +19,23 @@ const ProfileScreen = ({navigation}) => {
           height: '10%',
           paddingHorizontal: 20,
         }}>
+           <Image
+                    source={require('../assets/arrow.png')}
+                    style={{
+                      height:10,
+                      width:30,
+                      marginTop:30
+                    }}
+               />
          <View style={styles.header}>
           <Text style={styles.text_header}> 
-          <Icon style={{width:100}}name="facebook"/> Profile</Text>
+            Profile</Text>
         </View>
       </View>
       <Surface style={styles.surface}>
           <Image    
           source={require('../assets/add.png')}
-          style={{width:70,height:70}}
+          style={{width:70,height:70, marginTop:-30}}
           />
           <Text style={{ alignItems: 'center',color: 'red', fontSize: 15,}}>Add Photo</Text>
       <View style={styles.action}>
@@ -123,7 +131,7 @@ const styles = StyleSheet.create({
     width: '100%',
     alignItems: 'center',
     justifyContent: 'center',
-    marginTop:-40
+    marginTop:-25
   },
 
   header: {
@@ -132,7 +140,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingHorizontal: 20,
     paddingBottom: 0,
-    marginTop: 5,
+    marginTop: -15,
   },
   text_header: {
     alignItems: 'center',

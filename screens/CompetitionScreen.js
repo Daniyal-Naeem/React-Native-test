@@ -1,5 +1,6 @@
 import React from 'react';
-import {View, StyleSheet, Text, Button} from 'react-native';
+import {View, StyleSheet, Text} from 'react-native';
+import {Button} from 'react-native-paper';
 
 
 
@@ -19,10 +20,12 @@ const CompetitionScreen = ({navigation}) => {
           <Text style={styles.text_header}> 
            Competitions</Text>
         </View>
-        <Button mode="Text" onPress={() => navigation.navigate('MyVideos')}>
-            CREATE ACCOUNT
-          </Button>
       </View>
+      <View style={styles.button}>
+          <Button mode="Text" onPress={() => navigation.navigate('MyVideos')}>
+            MY VIDEOS
+          </Button>
+        </View>
     </View>
   );
 };
@@ -30,6 +33,10 @@ const CompetitionScreen = ({navigation}) => {
 export default CompetitionScreen;
 
 const styles = StyleSheet.create({
+  button: {
+    alignItems: 'center',
+    marginTop: 20,
+  },
   container: {
     flex: 1,
     backgroundColor: '#DCDCDC',

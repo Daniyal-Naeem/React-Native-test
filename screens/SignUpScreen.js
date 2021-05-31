@@ -5,7 +5,8 @@ import {
   Platform,
   StyleSheet,
   KeyboardAvoidingView,
-  ScrollView
+  ScrollView,
+  Image
 } from 'react-native';
 import {Button, TextInput, Surface} from 'react-native-paper';
 
@@ -55,6 +56,14 @@ const SignUpScreen = ({navigation}) => {
             borderBottomRightRadius: 30,
             paddingHorizontal: 20,
           }}>
+              <Image
+                    source={require('../assets/left-arrow.png')}
+                    style={{
+                      height:10,
+                      width:30,
+                      marginTop:30
+                    }}
+               />
           <View style={styles.header}>
             <Text style={styles.text_header}>Sign Up</Text>
           </View>
@@ -148,7 +157,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingHorizontal: 20,
     paddingBottom: 20,
-    marginTop: 20,
+    marginTop: -15,
   },
   text_header: {
     alignItems: 'center',

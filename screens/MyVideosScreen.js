@@ -1,10 +1,10 @@
 import React from 'react';
-import {View, StyleSheet, Text} from 'react-native';
-import Icon from 'react-native-vector-icons/FontAwesome';
+import {View, StyleSheet, Text, Image} from 'react-native';
+import {Surface} from 'react-native-paper';
+import ItemList from '../screens/ItemList'
 
 
 const MyVideosScreen = ({navigation}) => {
-
   return (
     <View style={styles.container}>
       <View
@@ -15,12 +15,47 @@ const MyVideosScreen = ({navigation}) => {
           borderBottomRightRadius:20,
           borderBottomLeftRadius:20
         }}>
-         <View style={styles.header}>
-          <Text style={styles.text_header}> 
-          <Icon style={{width:100}}name="facebook"/> My Videos</Text>
+            
+         <Image
+                    source={require('../assets/arrow.png')}
+                    style={{
+                      height:10,
+                      width:30,
+                      marginTop:30
+                    }}
+               />
+        <View style={styles.header}>
+          <Text style={styles.text_header}> My Videos</Text>
         </View>
       </View>
-      <AppNavigator/>
+      <View  style={{marginTop:20}}>
+      <ItemList
+         img={require('../assets/dani.png')}
+         title="Daniyal Naeem"          
+         />
+      </View>
+      <Surface style={styles.surface}>
+      <ItemList
+         img={require('../assets/logo.png')}
+         title="Naat Khuwan"          
+      />
+       <ItemList
+         img={require('../assets/logo.png')}
+         title="Naat Khuwan"          
+      />
+       <ItemList
+         img={require('../assets/logo.png')}
+         title="Naat Khuwan"          
+      />
+       <ItemList
+         img={require('../assets/logo.png')}
+         title="Naat Khuwan"          
+      />
+       <ItemList
+         img={require('../assets/logo.png')}
+         title="Naat Khuwan"          
+      />
+        </Surface>
     </View>
   );
 };
@@ -30,25 +65,27 @@ export default MyVideosScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#DCDCDC',
+    backgroundColor: '#fff',
   },
   surface: {
     borderRadius: 30,
+    backgroundColor:'#DCDCDC',
     paddingTop: 10,
-    height: '85%',
+    height: '90%',
     width: '100%',
     alignItems: 'center',
     justifyContent: 'center',
-    marginTop:-40
+
   },
 
   header: {
     flex: 3,
-    justifyContent: 'flex-start',
+    flexDirection: 'row',
+    justifyContent: 'space-around',
     alignItems: 'center',
     paddingHorizontal: 20,
     paddingBottom: 0,
-    marginTop: 15,
+    marginTop: -35,
   },
   text_header: {
     alignItems: 'center',
