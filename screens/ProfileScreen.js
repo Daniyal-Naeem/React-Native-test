@@ -1,110 +1,112 @@
 import React from 'react';
-import {View, Platform, StyleSheet, Text, Image} from 'react-native';
+import {
+  View,
+  StyleSheet,
+  Text,
+  Image,
+  KeyboardAvoidingView,
+  ScrollView,
+} from 'react-native';
 import {Button, TextInput, Surface} from 'react-native-paper';
-import Icon from 'react-native-vector-icons/FontAwesome';
 
 const ProfileScreen = ({navigation}) => {
-  const [data, setData] = React.useState({
-    email: '',
-    password: '',
-    check_textInputChange: false,
-    secureTextEntry: true,
-  });
-
   return (
-    <View style={styles.container}>
-      <View
-        style={{
-          backgroundColor: '#082444',
-          height: '10%',
-          paddingHorizontal: 20,
-        }}>
-           <Image
-                    source={require('../assets/arrow.png')}
-                    style={{
-                      height:10,
-                      width:30,
-                      marginTop:30
-                    }}
-               />
-         <View style={styles.header}>
-          <Text style={styles.text_header}> 
-            Profile</Text>
-        </View>
-      </View>
-      <Surface style={styles.surface}>
-          <Image    
-          source={require('../assets/add.png')}
-          style={{width:70,height:70, marginTop:-30}}
-          />
-          <Text style={{ alignItems: 'center',color: 'red', fontSize: 15,}}>Add Photo</Text>
-      <View style={styles.action}>
-            <TextInput
-              mode="outlined"
-              label="Name"
-              placeholder="Your Name"
-              style={styles.textInput}
-              autoCapitalize="none"
+    <KeyboardAvoidingView style={{flex: 1}}>
+      <ScrollView contentContainerStyle={{flex: 1}} bounces={false}>
+        <View style={styles.container}>
+          <View
+            style={{
+              backgroundColor: '#082444',
+              height: '10%',
+              paddingHorizontal: 20,
+            }}>
+            <Image
+              source={require('../assets/arrow.png')}
+              style={{
+                height: 10,
+                width: 30,
+                marginTop: 30,
+              }}
             />
-     </View>
-          <View style={styles.action}>
-            <TextInput
-              mode="outlined"
-              label="Username"
-              placeholder="Username"
-              style={styles.textInput}
-              autoCapitalize="none"
-            />
+            <View style={styles.header}>
+              <Text style={styles.text_header}>Profile</Text>
+            </View>
           </View>
-          <View style={styles.action}>
-            <TextInput
-              mode="outlined"
-              label="Email"
-              placeholder="Your Email"
-              style={styles.textInput}
-              autoCapitalize="none"
+          <Surface style={styles.surface}>
+            <Image
+              source={require('../assets/add.png')}
+              style={{width: 70, height: 70, marginTop: -30}}
             />
-          </View>
-          <View style={styles.action}>
-            <TextInput
-              mode="outlined"
-              label="Password"
-              placeholder="Your Password"
-              secureTextEntry={data.secureTextEntry ? true : false}
-              style={styles.textInput}
-              autoCapitalize="none"
-            />
-          </View>
-          <View style={styles.action}>
-            <TextInput
-              mode="outlined"
-              label="Father Name"
-              placeholder="Father Name"
-              secureTextEntry={data.secureTextEntry ? true : false}
-              style={styles.textInput}
-              autoCapitalize="none"
-            />
-          </View>
-          <View style={styles.action}>
-            <TextInput
-              mode="outlined"
-              label="Date of Birth"
-              placeholder="DD/MM/YYYY"
-              style={styles.textInput}
-              autoCapitalize="none"
-            />
-          </View>
-          <View style={styles.action}>
-            <TextInput
-              mode="outlined"
-              label="Cnic"
-              placeholder="17301-010101010-1"
-              style={styles.textInput}
-              autoCapitalize="none"
-            />
-          </View>
-        </Surface>
-        <View style={styles.button}>
+            <Text style={{alignItems: 'center', color: 'red', fontSize: 15}}>
+              Add Photo
+            </Text>
+            <View style={styles.action}>
+              <TextInput
+                mode="outlined"
+                label="Name"
+                placeholder="Your Name"
+                style={styles.textInput}
+                autoCapitalize="none"
+              />
+            </View>
+            <View style={styles.action}>
+              <TextInput
+                mode="outlined"
+                label="Username"
+                placeholder="Username"
+                style={styles.textInput}
+                autoCapitalize="none"
+              />
+            </View>
+            <View style={styles.action}>
+              <TextInput
+                mode="outlined"
+                label="Email"
+                placeholder="Your Email"
+                style={styles.textInput}
+                autoCapitalize="none"
+              />
+            </View>
+            <View style={styles.action}>
+              <TextInput
+                mode="outlined"
+                label="Password"
+                placeholder="Your Password"
+                secureTextEntry={data.secureTextEntry ? true : false}
+                style={styles.textInput}
+                autoCapitalize="none"
+              />
+            </View>
+            <View style={styles.action}>
+              <TextInput
+                mode="outlined"
+                label="Father Name"
+                placeholder="Father Name"
+                secureTextEntry={data.secureTextEntry ? true : false}
+                style={styles.textInput}
+                autoCapitalize="none"
+              />
+            </View>
+            <View style={styles.action}>
+              <TextInput
+                mode="outlined"
+                label="Date of Birth"
+                placeholder="DD/MM/YYYY"
+                style={styles.textInput}
+                autoCapitalize="none"
+              />
+            </View>
+            <View style={styles.action}>
+              <TextInput
+                mode="outlined"
+                label="Cnic"
+                placeholder="17301-010101010-1"
+                style={styles.textInput}
+                autoCapitalize="none"
+              />
+            </View>
+          </Surface>
+          <View style={styles.button}>
             <Button
               mode="contained"
               color="#FFA500"
@@ -113,7 +115,9 @@ const ProfileScreen = ({navigation}) => {
               Save
             </Button>
           </View>
-    </View>
+        </View>
+      </ScrollView>
+    </KeyboardAvoidingView>
   );
 };
 
@@ -131,7 +135,7 @@ const styles = StyleSheet.create({
     width: '100%',
     alignItems: 'center',
     justifyContent: 'center',
-    marginTop:-25
+    marginTop: -25,
   },
 
   header: {
@@ -146,13 +150,13 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     color: 'white',
     fontSize: 15,
-    fontWeight:'bold'
+    fontWeight: 'bold',
   },
   action: {
     flexDirection: 'row',
     borderBottomWidth: 1,
     borderBottomColor: '#f2f2f2',
-    width:'80%',
+    width: '80%',
   },
   textInput: {
     flex: 1,
@@ -163,6 +167,6 @@ const styles = StyleSheet.create({
   button: {
     alignItems: 'flex-end',
     marginTop: 20,
-    marginRight:10
+    marginRight: 10,
   },
 });
