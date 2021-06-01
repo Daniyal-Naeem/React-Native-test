@@ -15,7 +15,7 @@ const ProfileScreen = ({navigation}) => {
     <View style={styles.container}>
       <View
         style={{
-          backgroundColor: '#4B0082',
+          backgroundColor: '#082444',
           height: '10%',
           paddingHorizontal: 20,
         }}>
@@ -122,7 +122,7 @@ export default ProfileScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#DCDCDC',
+    backgroundColor: '#f2f2f2',
   },
   surface: {
     borderRadius: 30,

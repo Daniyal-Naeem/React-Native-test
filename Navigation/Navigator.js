@@ -26,8 +26,8 @@ const BottomTabNavigator = () => {
             }}
         >
              <Tab.Screen
-                name="MyVideos"
-                component={MyVideosScreen}
+                name="Profile"
+                component={ProfileScreen}
                 options={{
                     tabBarLabel:"",
                     tabBarIcon:({color, size}) => (
@@ -39,8 +39,8 @@ const BottomTabNavigator = () => {
                 }}
             />
               <Tab.Screen
-                name="Profile"
-                component={ProfileScreen}
+                name="Competition"
+                component={CompetitionScreen}
                 options={{
                     tabBarLabel:"",
                     tabBarIcon:({color, size}) => (
@@ -81,14 +81,14 @@ const BottomTabNavigator = () => {
             />
           
                <Tab.Screen
-                name="Competition"
-                component={CompetitionScreen}
+                name="MyVideo"
+                component={MyVideosScreen}
                 options={{
                     tabBarLabel:"",
                     tabBarIcon:({color, size}) => (
                         <Image
-                            source={require("../assets/trophy.png")}
-                            style={{ height:35, width:35 }}
+                            source={require("../assets/video.png")}
+                            style={{ height:65, width:65 }}
                         />
                     )
                 }}

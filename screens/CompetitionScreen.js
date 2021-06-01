@@ -1,6 +1,5 @@
 import React from 'react';
-import {View, StyleSheet, Text} from 'react-native';
-import {Button} from 'react-native-paper';
+import {View, StyleSheet, Text, Image} from 'react-native';
 
 
 
@@ -10,22 +9,47 @@ const CompetitionScreen = ({navigation}) => {
     <View style={styles.container}>
       <View
         style={{
-          backgroundColor: '#4B0082',
+          backgroundColor: '#082444',
           height: '10%',
           paddingHorizontal: 20,
           borderBottomRightRadius:20,
           borderBottomLeftRadius:20
         }}>
+          <Image
+                    source={require('../assets/arrow.png')}
+                    style={{
+                      height:10,
+                      width:30,
+                      marginTop:30
+                    }}
+               />
          <View style={styles.header}>
           <Text style={styles.text_header}> 
            Competitions</Text>
         </View>
       </View>
-      <View style={styles.button}>
-          <Button mode="Text" onPress={() => navigation.navigate('MyVideos')}>
-            MY VIDEOS
-          </Button>
-        </View>
+      <View>
+        <Image
+          source={require('../assets/dani.png')}
+          blurRadius={10}
+          style={{
+            borderRadius:20,
+            height:100,
+            width:300,
+            marginTop:50,
+            marginLeft:50
+          }} 
+          
+        />
+        <Text
+        onPress={() => navigation.navigate('MyVideos')}
+         style={{
+           fontSize:20,
+           color:'white',
+           marginTop:-60,
+           marginLeft:130
+           }}>#NatKhuwan</Text>
+      </View>
     </View>
   );
 };
@@ -33,53 +57,23 @@ const CompetitionScreen = ({navigation}) => {
 export default CompetitionScreen;
 
 const styles = StyleSheet.create({
-  button: {
-    alignItems: 'center',
-    marginTop: 20,
-  },
+ 
   container: {
     flex: 1,
-    backgroundColor: '#DCDCDC',
+    backgroundColor: '#f2f2f2',
   },
-  surface: {
-    borderRadius: 30,
-    paddingTop: 10,
-    height: '85%',
-    width: '100%',
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginTop:-40
-  },
-
   header: {
     flex: 3,
     justifyContent: 'flex-start',
     alignItems: 'center',
     paddingHorizontal: 20,
     paddingBottom: 0,
-    marginTop: 15,
+    marginTop: -15,
   },
   text_header: {
     alignItems: 'center',
     color: 'white',
     fontSize: 15,
     fontWeight:'bold'
-  },
-  action: {
-    flexDirection: 'row',
-    borderBottomWidth: 1,
-    borderBottomColor: '#f2f2f2',
-    width:'80%',
-  },
-  textInput: {
-    flex: 1,
-    paddingLeft: 15,
-    paddingRight: 15,
-    color: '#05375a',
-  },
-  button: {
-    alignItems: 'flex-end',
-    marginTop: 20,
-    marginRight:10
   },
 });

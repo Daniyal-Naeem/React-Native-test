@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
   View,
   Text,
@@ -10,38 +10,21 @@ import {
 } from 'react-native';
 import {Button, TextInput, Surface} from 'react-native-paper';
 
+import {Formik} from 'formik';
+import * as Yup from 'yup';
+
+const validationSchema = Yup.object().shape({
+  name: Yup.string().required().label("Name"),
+  email: Yup.string().required().email().label('Email'),
+  password: Yup.string().required().min(4).label('Password'),
+});
+
 const SignUpScreen = ({navigation}) => {
-  const [data, setData] = React.useState({
-    name:'',
-    email: '',
-    password: '',
-    check_textInputChange: false,
-    secureTextEntry: true,
-  });
-
-  const textInputChange = val => {
-    if (val.length !== 0) {
-      setData({
-        ...data,
-        name: val,
-        email: val,
-        check_textInputChange: true,
-      });
-    } else {
-      setData({
-        ...data,
-        name: val,
-        email: val,
-        check_textInputChange: false,
-      });
-    }
-  };
-
-  const handlePasswordChange = val => {
-    setData({
-      ...data,
-      password: val,
-    });
+  const handleSubmit = async ({email, password}) => {
+    const result = await authApi.login(email, password);
+    if (!result.ok) return setLoginFailed(true);
+    setLoginFailed(false);
+    auth.logIn(result.data);
   };
 
   return (
@@ -50,7 +33,7 @@ const SignUpScreen = ({navigation}) => {
       <View style={styles.container}>
         <View
           style={{
-            backgroundColor: '#FFA500',
+            backgroundColor: '#fbb521',
             height: '70%',
             borderBottomLeftRadius: 30,
             borderBottomRightRadius: 30,
@@ -69,16 +52,24 @@ const SignUpScreen = ({navigation}) => {
           </View>
         </View>
         <Surface style={styles.surface}>
+        <Formik
+              initialValues={{email: '', password: '',name:''}}
+              onSubmit={handleSubmit}
+              validationSchema={validationSchema}>
+              {({handleChange, handleSubmit, errors}) => (
+                <>
           <View style={styles.action}>
             <TextInput
               mode="outlined"
               label="Name"
+              name="name"
               placeholder="Your Name"
               style={styles.textInput}
               autoCapitalize="none"
-              onChangeText={val => textInputChange(val)}
+              onChangeText={handleChange('name')}
             />
           </View>
+          <Text style={{color:'red'}}>{errors.name}</Text>
           <View style={styles.action}>
             <TextInput
               mode="outlined"
@@ -86,27 +77,29 @@ const SignUpScreen = ({navigation}) => {
               placeholder="Your Email"
               style={styles.textInput}
               autoCapitalize="none"
-              onChangeText={val => textInputChange(val)}
+              keyboardType="email-address"
+              onChangeText={handleChange("email")}
             />
           </View>
-
+          <Text style={{color:'red'}}>{errors.email}</Text>
           <View style={styles.action}>
             <TextInput
               mode="outlined"
               label="Password"
               placeholder="Your Password"
-              secureTextEntry={data.secureTextEntry ? true : false}
+              secureTextEntry
               style={styles.textInput}
               autoCapitalize="none"
-              onChangeText={val => handlePasswordChange(val)}
+              onChangeText={handleChange("password")}
             />
           </View>
+          <Text style={{color:'red'}}>{errors.password}</Text>
           <View style={styles.button}>
             <Button
               mode="contained"
-              color="#FFA500"
+              color="#fbb521"
               style={{width: 250, height: 50, borderRadius: 10}}
-              onPress={() => navigation.navigate('Sign Up')}>
+              onPress={handleSubmit}>
               Sign Up
             </Button>
             <Text>OR CONTINUE WITH</Text>
@@ -119,12 +112,15 @@ const SignUpScreen = ({navigation}) => {
               </Button>
               <Button
                 mode="outlined"
-                style={{borderWidth: 2, borderRadius: 10}}
+                style={{borderWidth: 2, borderRadius: 10, marginRight:20}}
                 onPress={() => navigation.navigate('Competition')}>
                 FACEBOOK
               </Button>
             </View>
           </View>
+          </>
+              )}
+            </Formik>
         </Surface>
       </View>
       </ScrollView>
@@ -137,7 +133,7 @@ export default SignUpScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#DCDCDC',
+    backgroundColor: '#f2f2f2',
   },
   surface: {
     borderRadius: 30,

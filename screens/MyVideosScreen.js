@@ -9,7 +9,7 @@ const MyVideosScreen = ({navigation}) => {
     <View style={styles.container}>
       <View
         style={{
-          backgroundColor: '#4B0082',
+          backgroundColor: '#082444',
           height: '10%',
           paddingHorizontal: 20,
           borderBottomRightRadius:20,
@@ -69,7 +69,7 @@ const styles = StyleSheet.create({
   },
   surface: {
     borderRadius: 30,
-    backgroundColor:'#DCDCDC',
+    backgroundColor:'#f2f2f2',
     paddingTop: 10,
     height: '90%',
     width: '100%',
