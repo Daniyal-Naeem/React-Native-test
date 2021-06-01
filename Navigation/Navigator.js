@@ -96,6 +96,7 @@ const BottomTabNavigator = () => {
         </Tab.Navigator>
     );
 };
+   
 
 
 const Stack = createStackNavigator();
@@ -103,9 +104,7 @@ const Stack = createStackNavigator();
 const HomeStackNavigator = () => {
     return(
         <Stack.Navigator  screenOptions={{ headerShown: false, headerTitle:true}}>
-        <Stack.Screen name="Sign in" component={SignInScreen} />
         <Stack.Screen name="Splash" component={SplashScreen} />
-        <Stack.Screen name="Sign Up" component={SignUpScreen} />
         <Stack.Screen name="Profile" component={ProfileScreen} />
         <Stack.Screen name="Competition" component={CompetitionScreen} />
         <Stack.Screen name="MyVideos" component={BottomTabNavigator} />

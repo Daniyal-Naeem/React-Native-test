@@ -13,6 +13,9 @@ import {Button, TextInput, Surface} from 'react-native-paper';
 import {Formik} from 'formik';
 import * as Yup from 'yup';
 
+import {useDispatch} from 'react-redux'
+import {signupUser} from '../reducer/authReducer'
+
 const validationSchema = Yup.object().shape({
   name: Yup.string().required().label("Name"),
   email: Yup.string().required().email().label('Email'),
@@ -20,11 +23,18 @@ const validationSchema = Yup.object().shape({
 });
 
 const SignUpScreen = ({navigation}) => {
-  const handleSubmit = async ({email, password}) => {
-    const result = await authApi.login(email, password);
-    if (!result.ok) return setLoginFailed(true);
-    setLoginFailed(false);
-    auth.logIn(result.data);
+ 
+  const [name,setName] = useState("")
+  const [email,setEmail] = useState("")
+  const [password,setPassword] = useState("")
+  
+  const dispatch  = useDispatch()
+
+  const handleSubmit = () => {
+    dispatch(signupUser({email,password}))
+
+    setEmail("")
+    setPassword("")
   };
 
   return (

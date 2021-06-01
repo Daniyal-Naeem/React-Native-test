@@ -1,17 +1,45 @@
-import 'react-native-gesture-handler';
-import * as React from 'react';
-import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
-import HomeStackNavigator from "./Navigation/Navigator"
 
-const Stack = createStackNavigator();
+import React,{useEffect} from 'react';
 
-const App = () => {
+import AuthNavigator from './Navigation/AuthNavigator'
+import  HomeStackNavigator from './Navigation/Navigator'
+import {configureStore} from '@reduxjs/toolkit'
+import authReducer,{addToken} from './reducer/authReducer'
+import {Provider,useSelector,useDispatch} from 'react-redux'
+
+import { NavigationContainer } from "@react-navigation/native";
+
+
+const store = configureStore({
+  reducer:{
+    user:authReducer,
+  }
+})
+
+
+function App() {
+  const token = useSelector(state => state.user.token)
+  const dispatch = useDispatch()
+  useEffect(()=>{
+    dispatch(addToken())
+  },[])
+
   return (
-    <NavigationContainer>
-    <HomeStackNavigator/>
-  </NavigationContainer>
+       <NavigationContainer>
+   {token ?  <HomeStackNavigator/> : <AuthNavigator />}
+      </NavigationContainer> 
+    
+    
   );
 }
 
-export default App;
+export default ()=>{
+  return (
+    <Provider store={store}>
+      <App/>
+     </Provider>
+  )
+}
+
+
+

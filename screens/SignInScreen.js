@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
   View,
   Text,
@@ -11,6 +11,8 @@ import {
 import {Button, TextInput, Surface} from 'react-native-paper';
 import {Formik} from 'formik';
 import * as Yup from 'yup';
+import {useDispatch} from 'react-redux'
+import {signinUser} from '../reducer/authReducer'
 
 const validationSchema = Yup.object().shape({
   email: Yup.string().required().email().label('Email'),
@@ -19,11 +21,17 @@ const validationSchema = Yup.object().shape({
 
 
 const SignInScreen = ({navigation}) => {
-  const handleSubmit = async ({email, password}) => {
-    const result = await authApi.login(email, password);
-    if (!result.ok) return setLoginFailed(true);
-    setLoginFailed(false);
-    auth.logIn(result.data);
+
+  const [email,setEmail] = useState("")
+  const [password,setPassword] = useState("")
+  
+  const dispatch  = useDispatch()
+
+  const handleSubmit = () => {
+    dispatch(signinUser({email,password}))
+
+    setEmail("")
+    setPassword("")
   };
   return (
     <KeyboardAvoidingView style={{flex: 1}}>
@@ -82,7 +90,7 @@ const SignInScreen = ({navigation}) => {
                       mode="contained"
                       color="#fbb521"
                       style={{width: 250, height: 50, borderRadius: 10}}
-                      onPress={handleSubmit}>
+                      onPress={() => handleSubmit()}>
                       Login
                     </Button>
                     <Button
